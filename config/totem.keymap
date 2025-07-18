@@ -1,151 +1,245 @@
+// totem.keymap
+// ZMK keymap for TOTEM 38-key split keyboard with 15 layers, compatible with ZMK Studio
+
+// Define layer indices for readability
+#define BASE 0      // Colemak-DHm
+#define QWERTY 1    // QWERTY toggle
+#define NUM 2       // Number pad
+#define SYM 3       // Symbols
+#define NAV 4       // Navigation
+#define FN 5        // Function keys
+#define MEDIA 6     // Media controls
+#define MOUSE 7     // Mouse emulation
+#define SYS 8       // System controls
+#define MACRO 9     // Macros
+#define LAYER10 10  // Reserved for ZMK Studio
+#define LAYER11 11  // Reserved for ZMK Studio
+#define LAYER12 12  // Reserved for ZMK Studio
+#define LAYER13 13  // Reserved for ZMK Studio
+#define LAYER14 14  // Reserved for ZMK Studio
+
+// Include standard ZMK behaviors and keycodes
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+// Home-row mods configuration (timeless mods inspired by urob)
+#define HRM_TAP_TERM 200
+#define HRM_HOLD_TRIGGER_KEY_POSITIONS
+
+/dts-v1/;
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
-        layer_0 {
+        // Layer 0: Colemak-DHm (Base)
+        base {
+            display-name = "Colemak-DHm";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &kp Q     &kp W     &kp F     &kp P     &kp B     &kp J     &kp L     &kp U     &kp Y     &kp SEMI  // Left: qwfpg, Right: jluy;
+                &mt LCTRL A &mt LALT R &mt LSHFT S &mt LGUI T &kp G     &kp M     &mt RGUI N &mt RSHFT E &mt RALT I &mt RCTRL O // Home row mods
+                &kp Z     &kp X     &kp C     &kp D     &kp V     &kp K     &kp H     &kp COMMA &kp DOT   &kp SLASH // zxcvb k h,./
+                &none     &mo NAV   &kp SPACE &kp BKSP  &kp TAB   &mo NUM   &mo SYM   &none                     // Thumb keys
+                &kp ESC   &tog QWERTY                                                     &kp ENTER // Pinky keys
             >;
         };
 
-        layer_1 {
+        // Layer 1: QWERTY (Toggle for compatibility)
+        qwerty {
+            display-name = "QWERTY";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U     &kp I     &kp O     &kp P
+                &mt LCTRL A &mt LALT S &mt LSHFT D &mt LGUI F &kp G     &kp H     &mt RGUI J &mt RSHFT K &mt RALT L &mt RCTRL SEMI
+                &kp Z     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH
+                &none     &mo NAV   &kp SPACE &kp BKSP  &kp TAB   &mo NUM   &mo SYM   &none
+                &kp ESC   &tog BASE                                                       &kp ENTER
             >;
         };
 
-        layer_2 {
+        // Layer 2: Number Pad
+        num {
+            display-name = "Number";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &kp N7    &kp N8    &kp N9    &kp PLUS  &kp MINUS &none     &none     &none     &none     &none
+                &kp N4    &kp N5    &kp N6    &kp ASTER &kp SLASH &none     &none     &none     &none     &none
+                &kp N1    &kp N2    &kp N3    &kp EQUAL &kp DOT   &none     &none     &none     &none     &none
+                &none     &none     &kp N0    &kp BKSP  &none     &none     &none     &none
+                &none     &none                                                           &none
             >;
         };
 
-        layer_3 {
+        // Layer 3: Symbols
+        sym {
+            display-name = "Symbols";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &kp EXCL  &kp AT    &kp HASH  &kp DOLLAR &kp PERCENT &kp CARET &kp AMPR  &kp ASTER &kp LPAR  &kp RPAR
+                &kp GRAVE &kp TILDE &kp UNDER &kp MINUS &kp PLUS   &kp LBRC  &kp RBRC  &kp LBRACE &kp RBRACE &kp PIPE
+                &kp COLON &kp SEMI  &kp QUOTE &kp DQUOT &kp BSLASH &kp LT    &kp GT    &kp QMARK &kp SLASH &kp AT
+                &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none                                                           &none
             >;
         };
 
-        layer_4 {
+        // Layer 4: Navigation
+        nav {
+            display-name = "Navigation";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none     &none     &kp UP    &none     &none     &none     &none     &none     &none     &none
+                &kp HOME  &kp LEFT  &kp DOWN  &kp RIGHT &kp END   &none     &none     &none     &none     &none
+                &none     &kp PGUP  &none     &kp PGDN  &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &kp BKSP  &none     &none     &none     &none
+                &kp ESC   &none                                                           &kp ENTER
             >;
         };
 
-        layer_5 {
+        // Layer 5: Function Keys
+        fn {
+            display-name = "Function";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &kp F1    &kp F2    &kp F3    &kp F4    &kp F5    &kp F6    &kp F7    &kp F8    &kp F9    &kp F10
+                &kp F11   &kp F12   &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none                                                           &none
             >;
         };
 
-        layer_6 {
+        // Layer 6: Media Controls
+        media {
+            display-name = "Media";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &kp C_MUTE &kp C_VOL_UP &kp C_VOL_DN &kp C_PLAY &none     &none     &none     &none     &none     &none
+                &none     &kp C_PREV &kp C_NEXT &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &mo MEDIA  &none     &none     &none     &none     &none     &none
+                &none     &none                                                           &none
             >;
         };
 
-        layer_7 {
+        // Layer 7: Mouse Emulation
+        mouse {
+            display-name = "Mouse";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none     &none     &kp M_UP  &none     &none     &none     &none     &none     &none     &none
+                &none     &kp M_LEFT &kp M_DOWN &kp M_RIGHT &none   &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &kp M_BTN1 &kp M_BTN2 &none   &none     &none     &none
+                &none     &none                                                           &none
             >;
         };
 
-        layer_8 {
+        // Layer 8: System Controls
+        sys {
+            display-name = "System";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &mo SYS   &none
+                &studio_unlock &none                                                  &none
             >;
         };
 
-        layer_9 {
+        // Layer 9: Macros
+        macro {
+            display-name = "Macros";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none     &none     &none     &none     &none     &none     &none
+                &none     &none                                                           &none
             >;
         };
 
-        layer_10 {
+        // Layers 10-14: Reserved for ZMK Studio
+        layer10 {
+            display-name = "Layer 10";
+            status = "reserved";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none
+                &none &none &none
             >;
         };
 
-        layer_11 {
+        layer11 {
+            display-name = "Layer 11";
+            status = "reserved";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none
+                &none &none &none
             >;
         };
 
-        layer_12 {
+        layer12 {
+            display-name = "Layer 12";
+            status = "reserved";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none
+                &none &none &none
             >;
         };
 
-        layer_13 {
+        layer13 {
+            display-name = "Layer 13";
+            status = "reserved";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none
+                &none &none &none
             >;
         };
 
-        layer_14 {
+        layer14 {
+            display-name = "Layer 14";
+            status = "reserved";
             bindings = <
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans    &trans  &trans  &trans
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &none &none &none &none &none
+                &none &none &none
             >;
         };
+    };
 
-        layer_15 {
-            bindings = <
-        &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &studio_unlock    &trans  &trans  &trans
-            >;
+    // Combos for common symbols (inspired by urob's config)
+    combos {
+        compatible = "zmk,combos";
+        combo_semicolon {
+            timeout-ms = <50>;
+            key-positions = <17 18>;
+            bindings = <&kp SEMI>;
+            layers = <BASE QWERTY>;
+        };
+        combo_colon {
+            timeout-ms = <50>;
+            key-positions = <17 19>;
+            bindings = <&kp COLON>;
+            layers = <BASE QWERTY>;
+        };
+        combo_paren_left {
+            timeout-ms = <50>;
+            key-positions = <8 9>;
+            bindings = <&kp LPAR>;
+            layers = <BASE QWERTY>;
+        };
+        combo_paren_right {
+            timeout-ms = <50>;
+            key-positions = <28 29>;
+            bindings = <&kp RPAR>;
+            layers = <BASE QWERTY>;
         };
     };
 };
